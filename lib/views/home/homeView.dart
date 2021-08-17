@@ -1,3 +1,4 @@
+import 'dart:html';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -5,6 +6,9 @@ import 'package:widjiwidji/assets/colors/colors.dart';
 import 'package:outline_gradient_button/outline_gradient_button.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:widjiwidji/services/email/emailMethods.dart';
+import 'package:widjiwidji/presentation/custom_icons.dart';
+import 'package:widjiwidji/views/components/gradient_icon.dart';
+import 'package:widjiwidji/views/home/social_links.dart';
 
 const _url = 'https://mail.google.com/mail/u/0/#inbox?compose=new';
 
@@ -17,6 +21,14 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   late bool contactButtonHovered;
+  final Gradient mainGradient = LinearGradient(
+    colors: [
+      topGradientColor,
+      bottomGradientColor,
+    ],
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+  );
   @override
   void initState() {
     // TODO: implement initState
@@ -96,6 +108,46 @@ class _HomeViewState extends State<HomeView> {
                         Text(
                           'education',
                           style: sideNavFontStyle(),
+                        ),
+                        SizedBox(
+                          height: 75,
+                        ),
+                        GradientIcon(
+                          CustomIcons.github_circled,
+                          50,
+                          () {
+                            _launchURL(github_url);
+                          },
+                        ),
+                        SizedBox(
+                          height: 30,
+                        ),
+                        GradientIcon(
+                          CustomIcons.linkedin,
+                          50,
+                          () {
+                            _launchURL(linkedin_url);
+                          },
+                        ),
+                        SizedBox(
+                          height: 30,
+                        ),
+                        GradientIcon(
+                          CustomIcons.instagram,
+                          50,
+                          () {
+                            _launchURL(instagram_url);
+                          },
+                        ),
+                        SizedBox(
+                          height: 30,
+                        ),
+                        GradientIcon(
+                          CustomIcons.spotify,
+                          50,
+                          () {
+                            _launchURL(spotify_url);
+                          },
                         ),
                       ],
                     ),
@@ -196,5 +248,13 @@ class _HomeViewState extends State<HomeView> {
       fontSize: 18,
       color: Colors.white,
     );
+  }
+}
+
+_launchURL(String url) async {
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
   }
 }

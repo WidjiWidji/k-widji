@@ -43,6 +43,7 @@ dev_dependencies:
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter.
+uses-material-design: true
 flutter:
   assets:
       - assets/images/
@@ -63,4 +64,7 @@ flutter:
           weight: 500
         - asset: assets/fonts/Ubuntu/Ubuntu-Medium.ttf
           weight: 600
-  uses-material-design: true
+    - family: CustomIcons
+      fonts:
+        - asset: assets/fonts/CustomIcons/CustomIcons.ttf
+  
