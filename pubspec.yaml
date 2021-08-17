@@ -47,7 +47,7 @@ uses-material-design: true
 flutter:
   assets:
       - assets/images/
-      - assets/images/widjiwidjiLogo.png   
+      #- assets/images/widjiwidjiLogo.png   
   fonts:
     - family: MajorMonoDisplay
       fonts:

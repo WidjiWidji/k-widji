@@ -3,14 +3,14 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:widjiwidji/assets/colors/colors.dart';
-import 'package:outline_gradient_button/outline_gradient_button.dart';
+import 'package:widjiwidji/views/home/homeComponents/side_menu.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:widjiwidji/services/email/emailMethods.dart';
 import 'package:widjiwidji/presentation/custom_icons.dart';
 import 'package:widjiwidji/views/components/gradient_icon.dart';
 import 'package:widjiwidji/views/home/social_links.dart';
-
-const _url = 'https://mail.google.com/mail/u/0/#inbox?compose=new';
+import 'package:outline_gradient_button/outline_gradient_button.dart';
+import 'package:widjiwidji/views/components/on_hover.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -40,7 +40,6 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-
     return SafeArea(
       child: Scaffold(
         backgroundColor: mainBackgroundColor,
@@ -69,7 +68,7 @@ class _HomeViewState extends State<HomeView> {
                     child: Container(
                       width: 150,
                       height: 150,
-                      child: Image.network(
+                      child: Image.asset(
                         'assets/images/widjiwidjiLogo.png',
                         scale: 0.2,
                       ),
@@ -112,41 +111,77 @@ class _HomeViewState extends State<HomeView> {
                         SizedBox(
                           height: 75,
                         ),
-                        GradientIcon(
-                          CustomIcons.github_circled,
-                          50,
-                          () {
-                            _launchURL(github_url);
+                        OnHover(
+                          builder: (isHovered) {
+                            return PhysicalModel(
+                              shape: BoxShape.circle,
+                              elevation: isHovered ? 16 : 0,
+                              child: GradientIcon(
+                                CustomIcons.github_circled,
+                                50,
+                                () {
+                                  _launchURL(github_url);
+                                },
+                              ),
+                              color: Colors.transparent,
+                            );
                           },
                         ),
                         SizedBox(
                           height: 30,
                         ),
-                        GradientIcon(
-                          CustomIcons.linkedin,
-                          50,
-                          () {
-                            _launchURL(linkedin_url);
+                        OnHover(
+                          builder: (isHovered) {
+                            return PhysicalModel(
+                              shape: BoxShape.circle,
+                              elevation: isHovered ? 16 : 0,
+                              child: GradientIcon(
+                                CustomIcons.linkedin,
+                                50,
+                                () {
+                                  _launchURL(linkedin_url);
+                                },
+                              ),
+                              color: Colors.transparent,
+                            );
                           },
                         ),
                         SizedBox(
                           height: 30,
                         ),
-                        GradientIcon(
-                          CustomIcons.instagram,
-                          50,
-                          () {
-                            _launchURL(instagram_url);
+                        OnHover(
+                          builder: (isHovered) {
+                            return PhysicalModel(
+                              shape: BoxShape.rectangle,
+                              elevation: isHovered ? 16 : 0,
+                              child: GradientIcon(
+                                CustomIcons.instagram,
+                                50,
+                                () {
+                                  _launchURL(linkedin_url);
+                                },
+                              ),
+                              color: Colors.transparent,
+                            );
                           },
                         ),
                         SizedBox(
                           height: 30,
                         ),
-                        GradientIcon(
-                          CustomIcons.spotify,
-                          50,
-                          () {
-                            _launchURL(spotify_url);
+                        OnHover(
+                          builder: (isHovered) {
+                            return PhysicalModel(
+                              shape: BoxShape.circle,
+                              elevation: isHovered ? 16 : 0,
+                              child: GradientIcon(
+                                CustomIcons.spotify,
+                                50,
+                                () {
+                                  _launchURL(spotify_url);
+                                },
+                              ),
+                              color: Colors.transparent,
+                            );
                           },
                         ),
                       ],
@@ -202,6 +237,21 @@ class _HomeViewState extends State<HomeView> {
                       color: subHeadingColor.withOpacity(0.5),
                     ),
                   ),
+                  SizedBox(
+                    height: 50,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: screenWidth / 4),
+                    child: themedButton(
+                      'say hi!',
+                      () {},
+                    ),
+                  ),
+                  Container(
+                    child: Column(
+                      children: [],
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -211,50 +261,46 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 
-  OutlineGradientButton themedButton(String text, void Function()? tap) {
-    return OutlineGradientButton(
-      onHover: (value) {
-        setState(() {
-          contactButtonHovered = value;
-        });
+  //need to move these into homeComponents/side_menu.dart
+  dynamic _launchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+  OnHover themedButton(String text, void Function()? tap) {
+    return OnHover(
+      builder: (isHovered) {
+        return PhysicalModel(
+          color: Colors.transparent,
+          elevation: isHovered ? 16 : 0,
+          child: OutlineGradientButton(
+            onTap: tap,
+            child: Text(
+              text,
+              style: TextStyle(
+                fontFamily: 'MajorMonoDisplay',
+                fontSize: 15,
+                color: isHovered ? Colors.black : Colors.white,
+              ),
+            ),
+            backgroundColor: isHovered ? topGradientColor : Colors.transparent,
+            padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+            strokeWidth: 3.0,
+            radius: Radius.circular(5.0),
+            gradient: LinearGradient(
+              colors: [
+                topGradientColor,
+                bottomGradientColor,
+              ],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
+          ),
+        );
       },
-      onTap: tap,
-      child: Text(
-        text,
-        style: TextStyle(
-          fontFamily: 'MajorMonoDisplay',
-          fontSize: 15,
-          color: contactButtonHovered ? Colors.black : Colors.white,
-        ),
-      ),
-      backgroundColor: contactButtonHovered ? Colors.white : Colors.transparent,
-      padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
-      strokeWidth: 3.0,
-      radius: Radius.circular(5.0),
-      gradient: LinearGradient(
-        colors: [
-          topGradientColor,
-          bottomGradientColor,
-        ],
-        begin: Alignment.topCenter,
-        end: Alignment.bottomCenter,
-      ),
     );
-  }
-
-  TextStyle sideNavFontStyle() {
-    return TextStyle(
-      fontFamily: 'MajorMonoDisplay',
-      fontSize: 18,
-      color: Colors.white,
-    );
-  }
-}
-
-_launchURL(String url) async {
-  if (await canLaunch(url)) {
-    await launch(url);
-  } else {
-    throw 'Could not launch $url';
   }
 }
