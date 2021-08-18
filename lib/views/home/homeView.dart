@@ -250,75 +250,71 @@ class _HomeViewState extends State<HomeView> {
                       },
                     ),
                   ),
-                  Container(
-                    width: screenWidth / 1.4,
-                    height: screenHeight / 2,
-                    child: Timeline.tileBuilder(
-                      theme: TimelineThemeData(
-                        direction: Axis.horizontal,
-                        connectorTheme: ConnectorThemeData(
-                          space: 50.0,
-                          thickness: 5.0,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 100,
+                    ),
+                    child: Container(
+                      width: screenWidth / 1.4,
+                      height: screenHeight / 2,
+                      child: Timeline.tileBuilder(
+                        theme: TimelineThemeData(
+                          direction: Axis.horizontal,
+                          connectorTheme: ConnectorThemeData(
+                            space: 50.0,
+                            thickness: 5.0,
+                          ),
                         ),
-                      ),
-                      builder: TimelineTileBuilder.connected(
-                          itemCount: 10,
-                          connectionDirection: ConnectionDirection.before,
-                          itemExtentBuilder: (_, __) => screenWidth / 4.5,
-                          oppositeContentsBuilder: (context, index) {
-                            return Padding(
-                              padding: EdgeInsets.only(
-                                bottom: 15.0,
-                                // right: 50.0,
-                                // left: 50.0,
-                              ),
-                              child: Image.asset(
-                                'assets/images/timeline/${index + 1}.png',
-                                width: 100,
-                                height: 100,
-                              ),
-                            );
-                          },
-                          contentsBuilder: (context, index) {
-                            return Padding(
-                              padding: EdgeInsets.only(
-                                top: 15.0,
-                                // right: 50.0,
-                                // left: 50.0,
-                              ),
-                              child: Text(
-                                _nodes[index],
-                                style: TextStyle(
-                                  fontFamily: 'SourceCodePro',
-                                  color: Colors.white,
-                                  fontSize: 20,
+                        builder: TimelineTileBuilder.connected(
+                            itemCount: 10,
+                            connectionDirection: ConnectionDirection.after,
+                            itemExtentBuilder: (_, __) => screenWidth / 4.5,
+                            oppositeContentsBuilder: (context, index) {
+                              return Padding(
+                                padding: EdgeInsets.only(
+                                  bottom: 15.0,
+                                  // right: 50.0,
+                                  // left: 50.0,
                                 ),
-                              ),
-                            );
-                          },
-                          indicatorBuilder: (_, index) {
-                            return Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(100),
-                                color: Colors.transparent,
-                                border: Border.all(
-                                  width: 2,
-                                  color: topGradientColor,
+                                child: Image.asset(
+                                  'assets/images/timeline/${index + 1}.png',
+                                  // width: 100,
+                                  // height: 100,
                                 ),
-                              ),
-                              child: DotIndicator(
+                              );
+                            },
+                            contentsBuilder: (context, index) {
+                              return Padding(
+                                padding: EdgeInsets.only(
+                                  top: 15.0,
+                                  // right: 50.0,
+                                  // left: 50.0,
+                                ),
+                                child: Text(
+                                  _nodes[index],
+                                  style: TextStyle(
+                                    fontFamily: 'SourceCodePro',
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                  ),
+                                ),
+                              );
+                            },
+                            indicatorBuilder: (_, index) {
+                              return OutlinedDotIndicator(
                                 size: 20.0,
-                                color: Colors.transparent,
-                              ),
-                            );
-                          },
-                          connectorBuilder: (_, index, type) {
-                            return DecoratedLineConnector(
-                              decoration: BoxDecoration(
-                                gradient: mainGradient,
-                              ),
-                            );
-                          }),
+                                color: topGradientColor,
+                                backgroundColor: bottomGradientColor,
+                              );
+                            },
+                            connectorBuilder: (_, index, type) {
+                              return DecoratedLineConnector(
+                                decoration: BoxDecoration(
+                                  gradient: mainGradient,
+                                ),
+                              );
+                            }),
+                      ),
                     ),
                   ),
                 ],
