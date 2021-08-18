@@ -33,6 +33,7 @@ dependencies:
   url_launcher: ^6.0.9
   open_mail_app: ^0.2.0
   firebase_storage_web: ^3.0.0
+  timelines: ^0.1.0
 
 
 dev_dependencies:
@@ -47,6 +48,7 @@ uses-material-design: true
 flutter:
   assets:
       - assets/images/
+      - assets/images/timeline/
       #- assets/images/widjiwidjiLogo.png   
   fonts:
     - family: MajorMonoDisplay
