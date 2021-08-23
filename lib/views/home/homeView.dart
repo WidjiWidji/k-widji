@@ -11,7 +11,7 @@ import 'package:widjiwidji/views/components/gradient_icon.dart';
 import 'package:widjiwidji/views/home/social_links.dart';
 import 'package:outline_gradient_button/outline_gradient_button.dart';
 import 'package:widjiwidji/views/components/on_hover.dart';
-import 'package:timelines/timelines.dart';
+import 'package:widjiwidji/views/home/homeComponents/journey_line.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -256,65 +256,9 @@ class _HomeViewState extends State<HomeView> {
                     ),
                     child: Container(
                       width: screenWidth / 1.4,
-                      height: screenHeight / 2,
-                      child: Timeline.tileBuilder(
-                        theme: TimelineThemeData(
-                          direction: Axis.horizontal,
-                          connectorTheme: ConnectorThemeData(
-                            space: 50.0,
-                            thickness: 5.0,
-                          ),
-                        ),
-                        builder: TimelineTileBuilder.connected(
-                            itemCount: 10,
-                            connectionDirection: ConnectionDirection.after,
-                            itemExtentBuilder: (_, __) => screenWidth / 4.5,
-                            oppositeContentsBuilder: (context, index) {
-                              return Padding(
-                                padding: EdgeInsets.only(
-                                  bottom: 15.0,
-                                  // right: 50.0,
-                                  // left: 50.0,
-                                ),
-                                child: Image.asset(
-                                  'assets/images/timeline/${index + 1}.png',
-                                  // width: 100,
-                                  // height: 100,
-                                ),
-                              );
-                            },
-                            contentsBuilder: (context, index) {
-                              return Padding(
-                                padding: EdgeInsets.only(
-                                  top: 15.0,
-                                  // right: 50.0,
-                                  // left: 50.0,
-                                ),
-                                child: Text(
-                                  _nodes[index],
-                                  style: TextStyle(
-                                    fontFamily: 'SourceCodePro',
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                  ),
-                                ),
-                              );
-                            },
-                            indicatorBuilder: (_, index) {
-                              return OutlinedDotIndicator(
-                                size: 20.0,
-                                color: topGradientColor,
-                                backgroundColor: bottomGradientColor,
-                              );
-                            },
-                            connectorBuilder: (_, index, type) {
-                              return DecoratedLineConnector(
-                                decoration: BoxDecoration(
-                                  gradient: mainGradient,
-                                ),
-                              );
-                            }),
-                      ),
+                      height: screenHeight / 1.3,
+                      child: JourneyLine(
+                          screenWidth: screenWidth, mainGradient: mainGradient),
                     ),
                   ),
                 ],
@@ -369,16 +313,3 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 }
-
-final _nodes = [
-  'Walt Disney Elementary School',
-  'Iron Horse Middle School',
-  'Bled 🔸◾️ @ California High School',
-  'Tutored 👦👧 @ Kumon',
-  'Served 🍦 @ ColdStone Creamery',
-  'Became a Bobcat @ UC Merced',
-  'Researched Drones 🛸 @ MESA Labs',
-  'Became a Highlander @ UC Riverside',
-  'Delivered 🍕 @ Pizza the Hut',
-  'Taught 💻👨‍👧‍👦 @ Kids that Code',
-];
