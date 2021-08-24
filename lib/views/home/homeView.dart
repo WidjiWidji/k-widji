@@ -12,6 +12,7 @@ import 'package:widjiwidji/views/home/social_links.dart';
 import 'package:outline_gradient_button/outline_gradient_button.dart';
 import 'package:widjiwidji/views/components/on_hover.dart';
 import 'package:widjiwidji/views/home/homeComponents/journey_line.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -197,14 +198,28 @@ class _HomeViewState extends State<HomeView> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'Hello World! my name is',
-                    style: TextStyle(
-                      fontFamily: 'SourceCodePro',
-                      fontSize: 20,
-                      fontStyle: FontStyle.normal,
-                      color: greenCodeFontColor,
-                      wordSpacing: 0.1,
+                  SizedBox(
+                    width: 300.0,
+                    child: DefaultTextStyle(
+                      style: TextStyle(
+                        fontFamily: 'SourceCodePro',
+                        fontSize: 20,
+                        fontStyle: FontStyle.normal,
+                        color: greenCodeFontColor,
+                        wordSpacing: 0.1,
+                      ),
+                      child: AnimatedTextKit(
+                        totalRepeatCount: 1,
+                        animatedTexts: [
+                          TypewriterAnimatedText(
+                            'Hello World! my name is',
+                            speed: Duration(milliseconds: 300),
+                          ),
+                        ],
+                        onTap: () {
+                          print("Tap Event");
+                        },
+                      ),
                     ),
                   ),
                   Align(
@@ -215,14 +230,25 @@ class _HomeViewState extends State<HomeView> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              'Karsten Widjanarko',
-                              style: TextStyle(
-                                fontFamily: 'Ubuntu',
-                                fontSize: 60,
-                                fontWeight: FontWeight.w800,
-                                color: headingColor,
-                                wordSpacing: 0.1,
+                            SizedBox(
+                              width: 600,
+                              child: DefaultTextStyle(
+                                style: TextStyle(
+                                  fontFamily: 'Ubuntu',
+                                  fontSize: 60,
+                                  fontWeight: FontWeight.w800,
+                                  color: headingColor,
+                                  wordSpacing: 0.1,
+                                ),
+                                child: AnimatedTextKit(
+                                  repeatForever: true,
+                                  animatedTexts: [
+                                    FlickerAnimatedText('Karsten Widjanarko'),
+                                  ],
+                                  onTap: () {
+                                    print('kw tapped');
+                                  },
+                                ),
                               ),
                             ),
                             Text(
