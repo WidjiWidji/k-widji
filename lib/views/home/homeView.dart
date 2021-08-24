@@ -61,7 +61,7 @@ class _HomeViewState extends State<HomeView> {
                 ],
               ),
               height: screenHeight,
-              width: screenWidth / 6,
+              width: screenWidth / 4.35,
               child: Column(
                 children: [
                   Padding(
@@ -207,24 +207,61 @@ class _HomeViewState extends State<HomeView> {
                       wordSpacing: 0.1,
                     ),
                   ),
-                  Text(
-                    'Karsten Widjanarko',
-                    style: TextStyle(
-                      fontFamily: 'Ubuntu',
-                      fontSize: 60,
-                      fontWeight: FontWeight.w800,
-                      color: headingColor,
-                      wordSpacing: 0.1,
-                    ),
-                  ),
-                  Text(
-                    'I build web and mobile\napplications.',
-                    style: TextStyle(
-                      fontFamily: 'Ubuntu',
-                      fontSize: 60,
-                      fontWeight: FontWeight.w800,
-                      color: subHeadingColor.withOpacity(0.5),
-                      wordSpacing: 0.1,
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Row(
+                      children: [
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Karsten Widjanarko',
+                              style: TextStyle(
+                                fontFamily: 'Ubuntu',
+                                fontSize: 60,
+                                fontWeight: FontWeight.w800,
+                                color: headingColor,
+                                wordSpacing: 0.1,
+                              ),
+                            ),
+                            Text(
+                              'I build web and mobile\napplications.',
+                              style: TextStyle(
+                                fontFamily: 'Ubuntu',
+                                fontSize: 60,
+                                fontWeight: FontWeight.w800,
+                                color: subHeadingColor.withOpacity(0.5),
+                                wordSpacing: 0.1,
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          width: 300,
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(200),
+                            gradient: LinearGradient(
+                              colors: [
+                                topGradientColor,
+                                bottomGradientColor,
+                              ],
+                            ),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(6.0),
+                            child: CircleAvatar(
+                              radius: 125,
+                              backgroundColor: Colors.white,
+                              backgroundImage: AssetImage(
+                                'assets/images/karstenprofilepic.png',
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   SizedBox(

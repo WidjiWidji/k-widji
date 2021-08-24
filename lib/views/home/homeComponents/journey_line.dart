@@ -98,7 +98,8 @@ class _JourneyLineState extends State<JourneyLine> {
               child: Text(
                 _nodes[index],
                 style: TextStyle(
-                  fontFamily: 'SourceCodePro',
+                  fontFamily: 'Ubuntu',
+                  fontWeight: FontWeight.w800,
                   color: Colors.white,
                   fontSize: 20,
                 ),
@@ -115,7 +116,8 @@ class _JourneyLineState extends State<JourneyLine> {
           connectorBuilder: (_, index, type) {
             return DecoratedLineConnector(
               decoration: BoxDecoration(
-                gradient: widget.mainGradient,
+                color: Colors.white.withOpacity(0.1),
+                //gradient: widget.mainGradient,
               ),
             );
           }),
@@ -136,14 +138,16 @@ class JourneyCard extends StatelessWidget {
       height: 700,
       width: 400,
       decoration: BoxDecoration(
-        // boxShadow: [
-        //   BoxShadow(
-        //     color: topGradientColor.withOpacity(0.4),
-        //     spreadRadius: 7,
-        //     blurRadius: 5,
-        //     offset: Offset(0, 3),
-        //   )
-        // ],
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            // topGradientColor,
+            // bottomGradientColor,
+            Colors.white.withOpacity(0.2),
+            Colors.white.withOpacity(0.05),
+          ],
+        ),
         color: Colors.blue[800],
         borderRadius: BorderRadius.all(
           Radius.circular(20),
@@ -162,12 +166,12 @@ class JourneyCard extends StatelessWidget {
 final _nodes = [
   'Walt Disney Elementary School',
   'Iron Horse Middle School',
-  'Bled 🔸◾️ @ California High School',
-  'Tutored 👦👧 @ Kumon',
-  'Served 🍦 @ ColdStone Creamery',
-  'Became a Bobcat @ UC Merced',
-  'Researched Drones 🛸 @ MESA Labs',
-  'Became a Highlander @ UC Riverside',
-  'Delivered 🍕 @ Pizza the Hut',
-  'Taught 💻👨‍👧‍👦 @ Kids that Code',
+  'California High School',
+  'Kumon',
+  'ColdStone Creamery',
+  'UC Merced',
+  'MESA Labs',
+  'UC Riverside',
+  'Pizza the Hut',
+  'Kids that Code',
 ];
